@@ -1,0 +1,14 @@
+<h2>Labs</h2>
+<table class="table" *ngIf="labs$ | async as labs">
+  <thead>
+  <tr><th>Code</th><th>Name</th><th>Region</th></tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let lab of labs">
+    <td>{{ lab.code }}</td>
+    <td>{{ lab.name }}</td>
+    <td>{{ lab.region }}</td>
+  </tr>
+  </tbody>
+</table>
+<p *ngIf="(labs$ | async)?.length === 0">No labs yet.</p>

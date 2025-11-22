@@ -1,0 +1,17 @@
+<div *ngIf="test$ | async as test">
+  <h3>Test #{{ test.id }}</h3>
+  <p><strong>Lab:</strong> {{ test.lab.name }} ({{ test.lab.code }})</p>
+  <p><strong>Tire:</strong> {{ test.tire.code }} - {{ test.tire.brand }}</p>
+  <p><strong>Date:</strong> {{ test.testDate | date:'short' }}</p>
+  <p><strong>Track:</strong> {{ test.trackType }}</p>
+
+  <h4>Metrics</h4>
+  <table class="table">
+    <tr><th>Name</th><th>Value</th><th>Unit</th></tr>
+    <tr *ngFor="let metric of test.metrics">
+      <td>{{ metric.name }}</td>
+      <td>{{ metric.value }}</td>
+      <td>{{ metric.unit }}</td>
+    </tr>
+  </table>
+</div>

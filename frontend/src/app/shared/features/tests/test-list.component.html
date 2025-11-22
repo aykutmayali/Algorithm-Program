@@ -1,0 +1,27 @@
+<h2>Tests</h2>
+<form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+  <label>Lab:
+    <select formControlName="labId">
+      <option [ngValue]="null">All</option>
+      <option *ngFor="let lab of (labs$ | async)" [value]="lab.id">{{ lab.code }}</option>
+    </select>
+  </label>
+  <label>From: <input type="datetime-local" formControlName="from"></label>
+  <label>To: <input type="datetime-local" formControlName="to"></label>
+  <button type="submit">Filter</button>
+</form>
+
+<table class="table" *ngIf="tests$ | async as tests">
+  <thead>
+  <tr><th>Lab</th><th>Tire</th><th>Date</th><th>Track</th></tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let test of tests" [routerLink]="['/tests', test.id]" style="cursor:pointer">
+    <td>{{ test.lab.code }}</td>
+    <td>{{ test.tire.code }}</td>
+    <td>{{ test.testDate | date:'short' }}</td>
+    <td>{{ test.trackType }}</td>
+  </tr>
+  </tbody>
+</table>
+<p *ngIf="(tests$ | async)?.length === 0">No tests.</p>
