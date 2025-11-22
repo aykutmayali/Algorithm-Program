@@ -1,0 +1,27 @@
+<h2>Create Test Run</h2>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>Lab:
+    <select formControlName="labId">
+      <option *ngFor="let lab of labs" [value]="lab.id">{{ lab.code }}</option>
+    </select>
+  </label>
+  <label>Tire:
+    <select formControlName="tireId">
+      <option *ngFor="let tire of tires" [value]="tire.id">{{ tire.code }}</option>
+    </select>
+  </label>
+  <label>Date: <input type="datetime-local" formControlName="testDate"></label>
+  <label>Track Type: <input type="text" formControlName="trackType"></label>
+
+  <div formArrayName="metrics">
+    <h4>Metrics</h4>
+    <div *ngFor="let metric of metrics.controls; let i = index" [formGroupName]="i">
+      <input formControlName="name" placeholder="Metric name">
+      <input formControlName="value" type="number" placeholder="Value">
+      <input formControlName="unit" placeholder="Unit">
+      <button type="button" (click)="removeMetric(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addMetric()">Add Metric</button>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Create</button>
+</form>
